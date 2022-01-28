@@ -1,0 +1,45 @@
+{
+  "ms": 24,
+  "query": "*[_type=='coins']{\n  name,\n  usdPrice,\n  contractAddress,\n  symbol,\n  logo\n}",
+  "result": [
+    {
+      "contractAddress": "0xbA4B7662a945aCB871EbA3241F6f32c97aB1cBa5",
+      "logo": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-c1e91983831f17b8096ea86a9a8338ed16aec427-1000x1000-png",
+          "_type": "reference"
+        }
+      },
+      "name": "Bitcoin",
+      "symbol": "BTC",
+      "usdPrice": "36,136"
+    },
+    {
+      "contractAddress": "0x7B649130C7712AD3621Ec76d719Ae25f029B8B83",
+      "logo": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-b9cbc84e454595bd0125b80022c339b0849eb720-1000x1000-png",
+          "_type": "reference"
+        }
+      },
+      "name": "Solana",
+      "symbol": "SOL",
+      "usdPrice": "93"
+    },
+    {
+      "contractAddress": "0x7C0436550C0891080a3AC029682ad2918Ca9227b",
+      "logo": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-4d32cfac7aafd7ccd071623952a1957977a4aba3-1000x1000-png",
+          "_type": "reference"
+        }
+      },
+      "name": "Ethereum",
+      "symbol": "ETH",
+      "usdPrice": "2382"
+    }
+  ]
+}

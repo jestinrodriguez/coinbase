@@ -8,7 +8,7 @@ const connectors = {
 
 function MyApp({ Component, pageProps }) {
   return (
-    // authentication
+    // metamask authentication
     <ThirdwebWeb3Provider
       supportedChainIds={supportedChainIds}
       connectors={connectors}

@@ -3,6 +3,8 @@ import { Line } from "react-chartjs-2";
 import React from "react";
 import Chart from "chart.js/auto";
 
+
+//Chart details for react-chartjs-2
 export const data = {
   labels: [
     "Jan",

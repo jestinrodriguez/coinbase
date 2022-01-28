@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
 
@@ -7,7 +7,36 @@ import { coins } from "../static/coins";
 import Coin from "./Coin";
 import BalanceChart from "./BalanceChart";
 
-const Portfolio = () => {
+const Portfolio = ({ thirdWebTokens, sanityTokens, walletAddress }) => {
+  const [walletBalance, setWalletBalance] = useState(0);
+
+  // returns a promise
+  // thirdWebTokens[1]
+  //   .balanceOf(walletAddress)
+  //   .then((balance) => console.log(Number(balance.displayValue)));
+
+  const tokenToUSD = {};
+
+  // convert money into USD
+  // modern for loop
+  for (const token of sanityTokens) {
+    tokenToUSD[token.contractAddress] = Number(token.usdPrice);
+  }
+
+  useEffect(() => {
+    const calculateTotalBalance = async () => {
+      const totalBalance = await Promise.all(
+        thirdWebTokens.map(async (token) => {
+          const balance = await token.balanceOf(walletAddress);
+          return Number(balance.displayValue) * tokenToUSD[token.address];
+        })
+      );
+      setWalletBalance(totalBalance.reduce((acc, curr) => acc + curr, 0));
+    };
+
+    return calculateTotalBalance();
+  }, [thirdWebTokens, sanityTokens]);
+
   return (
     <Wrapper>
       <Content>
@@ -17,8 +46,8 @@ const Portfolio = () => {
               <BalanceTitle>Portfolio balance</BalanceTitle>
               <BalanceValue>
                 {"$"}
-                {/* {walletBalance.toLocaleString()} */}
-                46,000
+                {walletBalance.toLocaleString()}
+                {/* 46,000 */}
               </BalanceValue>
             </Balance>
           </div>
@@ -47,7 +76,6 @@ const Portfolio = () => {
               {coins.map((coin, i) => (
                 <div key={i}>
                   <Coin coin={coin} />
-
                   <Divider />
                 </div>
               ))}

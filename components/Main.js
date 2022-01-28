@@ -3,10 +3,14 @@ import Portfolio from "./Portfolio";
 import styled from "styled-components";
 import Promos from "./Promos";
 
-const Main = () => {
+const Main = ({ walletAddress, sanityTokens, thirdWebTokens }) => {
   return (
     <Wrapper>
-      <Portfolio />
+      <Portfolio
+        walletAddress={walletAddress}
+        sanityTokens={sanityTokens}
+        thirdWebTokens={thirdWebTokens}
+      />
       <Promos />
     </Wrapper>
   );
@@ -19,6 +23,7 @@ const Wrapper = styled.div`
   max-height: calc(100vh - 64px);
   overflow: hidden;
   overflow-y: scroll;
+  // hide scrollbar
   :: -webkit-scrollbar {
     display: none;
   }
