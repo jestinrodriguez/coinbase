@@ -9,7 +9,13 @@ import Link from "next/Link";
 // needed to make modal work in NEXT.JS
 Modal.setAppElement("#__next");
 
-const Header = ({ walletAddress, connectWallet }) => {
+const Header = ({
+  walletAddress,
+  connectWallet,
+  sanityTokens,
+  thirdWebTokens,
+}) => {
+  console.log("header");
   const router = useRouter();
 
   const customStyles = {
@@ -51,7 +57,11 @@ const Header = ({ walletAddress, connectWallet }) => {
         onRequestClose={() => router.push("/")}
         style={customStyles}
       >
-        <TransferModal />
+        <TransferModal
+          sanityTokens={sanityTokens}
+          thirdWebTokens={thirdWebTokens}
+          walletAddress={walletAddress}
+        />
       </Modal>
     </Wrapper>
   );
