@@ -15,18 +15,44 @@ const Transfer = ({
   const [recipient, setRecipient] = useState();
   const [imageUrl, setImageUrl] = useState(null);
   const [activeThirdWebToken, setActiveThirdWebToken] = useState();
-
+  const [balance, setBalance] = useState("Fetching...");
   useEffect(() => {
     const activeToken = thirdWebTokens.find(
       (token) => token.address === selectedToken.contractAddress
     );
+    setActiveThirdWebToken(activeToken);
   }, [thirdWebTokens, selectedToken]);
 
+  // get selectedToken
   useEffect(() => {
-    console.log(selectedToken);
     const url = imageUrlBuilder(client).image(selectedToken.logo).url();
     setImageUrl(url);
   }, [selectedToken]);
+
+  // get thirdWeb balance
+  useEffect(() => {
+    const getBalance = async () => {
+      const balance = await activeThirdWebToken.balanceOf(walletAddress);
+      setBalance(balance.displayValue);
+    };
+
+    if (activeThirdWebToken) {
+      getBalance();
+    }
+  }, [activeThirdWebToken]);
+
+  // Transfer money using ThirdWeb
+  const sendCrypto = async (amount, recipient) => {
+    if (activeThirdWebToken && amount && recipient) {
+      const transaction = await activeThirdWebToken.transfer(
+        recipient,
+        amount.toString().concat("000000000000000000") // decimal
+      );
+      setAction("transferred");
+    } else {
+      console.error("missing data");
+    }
+  };
 
   return (
     <Wrapper>
@@ -38,7 +64,7 @@ const Transfer = ({
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
-          <span>ETH</span>
+          <span>{selectedToken.symbol}</span>
         </FlexInputContainer>
         <Warning style={{ color: amount && "#0a0b0d" }}>
           Amount is a required field
@@ -64,16 +90,20 @@ const Transfer = ({
             <Icon>
               <img src={imageUrl} alt='' />
             </Icon>
-            <CoinName>Ethereum</CoinName>
+            <CoinName>{selectedToken.name}</CoinName>
           </CoinSelectList>
         </Row>
       </TransferForm>
       <Row>
-        <Continue>Continue</Continue>
+        <Continue onClick={() => sendCrypto(amount, recipient)}>
+          Continue
+        </Continue>
       </Row>
       <Row>
-        <BalanceTitle>ETH Balance</BalanceTitle>
-        <Balance>1.2</Balance>
+        <BalanceTitle>{selectedToken.symbol} Balance</BalanceTitle>
+        <Balance>
+          {balance} {selectedToken.symbol}
+        </Balance>
       </Row>
     </Wrapper>
   );
