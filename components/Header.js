@@ -38,13 +38,6 @@ const Header = ({
     <Wrapper>
       <Title>Assets</Title>
       <ButtonsContainer>
-        {/* <WalletLink>
-          <WalletLinkTitle>Wallet Connected</WalletLinkTitle>
-          <WalletAddress>
-            {walletAddress.slice(0, 7)} ... {walletAddress.slice(35)}
-          </WalletAddress>
-          </WalletLink> */}
-
         {walletAddress ? (
           <WalletLink>
             <WalletLinkTitle>Wallet Connected</WalletLinkTitle>
