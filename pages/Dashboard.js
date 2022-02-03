@@ -30,7 +30,6 @@ const Dashboard = ({ address }) => {
       const sanityTokens = (await coins.json()).result;
 
       setSanityTokens(sanityTokens);
-      // console.log(sanityTokens);
 
       setThirdWebTokens(
         sanityTokens.map((token) => sdk.getTokenModule(token.contractAddress))
@@ -39,10 +38,6 @@ const Dashboard = ({ address }) => {
 
     return getSanityAndThirdWebTokens();
   }, []);
-
-  // console.log("Sanity -> ", sanityTokens);
-  // console.log("ThirdWeb -> ", thirdWebTokens);
-  // console.log(address);
 
   return (
     <Wrapper>

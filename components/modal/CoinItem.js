@@ -39,8 +39,6 @@ const CoinItem = ({
     getBalance();
   }, []);
 
-  console.log(token);
-
   return (
     <Wrapper
       style={{

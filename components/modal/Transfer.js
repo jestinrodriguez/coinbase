@@ -43,6 +43,8 @@ const Transfer = ({
 
   // Transfer money using ThirdWeb
   const sendCrypto = async (amount, recipient) => {
+    setAction("transferring");
+
     if (activeThirdWebToken && amount && recipient) {
       const transaction = await activeThirdWebToken.transfer(
         recipient,

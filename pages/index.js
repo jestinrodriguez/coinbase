@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useWeb3 } from "@3rdweb/hooks";
 import Dashboard from "./Dashboard";
+
+
 export default function Home() {
   //connect to metamask
   //authentication
