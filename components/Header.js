@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Modal from "react-modal";
 import { useRouter } from "next/router";
 import TransferModal from "./modal/TransferModal";
-import Link from "next/Link";
+import Link from "next/link";
 
 // needed to make modal work in NEXT.JS
 Modal.setAppElement("#__next");
